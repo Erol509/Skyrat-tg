@@ -13,7 +13,7 @@
 #define SMES_INPUTTING 8
 #define SMES_INPUT_ATTEMPT 9
 
-// SKYRAT EDIT COMMENT: Modularized Power change in modular_nova\master_files\code\modules\power\smes.dm
+// SKYRAT EDIT COMMENT: Modularized Power change in modular_skyrat\master_files\code\modules\power\smes.dm
 /obj/machinery/power/smes
 	name = "power storage unit"
 	desc = "A high-capacity superconducting magnetic energy storage (SMES) unit."
@@ -65,7 +65,7 @@
 
 /obj/machinery/power/smes/RefreshParts()
 	SHOULD_CALL_PARENT(FALSE)
-	var/power_coefficient = 0
+	var/power_coefficient = 1 // Bubber edit
 	var/max_charge = 0
 	var/new_charge = 0
 	for(var/datum/stock_part/capacitor/capacitor in component_parts)

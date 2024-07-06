@@ -247,9 +247,14 @@
 	log_silicon("CYBORG: [key_name(cyborg)] has transformed into the [new_model] model.")
 
 	//SKYRAT EDIT ADDITION BEGIN - ALTBORGS - Old check for 'dogborg' var no longer necessary, refactored into model_features instead.
-	new_model.update_dogborg()
+	//new_model.update_dogborg() // BUBBER REMOVAL
 	new_model.update_tallborg()
 	//SKYRAT EDIT ADDITION END
+	//BUBBER EDIT ADDTION BEGIN
+	new_model.update_quadruped()
+	new_model.update_lightweight()
+	new_model.update_robot_rest()
+	//BUBBER EDIT ADDTION END
 
 	INVOKE_ASYNC(new_model, PROC_REF(do_transform_animation))
 	qdel(src)
@@ -767,7 +772,7 @@
 	basic_modules = list(
 		/obj/item/assembly/flash/cyborg,
 		/obj/item/rsf/cookiesynth,
-		/obj/item/harmalarm,
+		/obj/item/harmalarm/bubbers, //BUBBERTATION CHANGE
 		/obj/item/reagent_containers/borghypo/peace,
 		/obj/item/holosign_creator/cyborg,
 		/obj/item/borg/cyborghug/peacekeeper,

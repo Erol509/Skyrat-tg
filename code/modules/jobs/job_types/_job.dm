@@ -517,6 +517,10 @@
 	if(length(GLOB.jobspawn_overrides[job_spawn_title])) //We're doing something special today.
 		return pick(GLOB.jobspawn_overrides[job_spawn_title])
 	// SKYRAT EDIT END
+	//BUBBERSTATION CHANGE START: MOONSTATION CRYO SPAWNS.
+	if(length(SSjob.latejoin_override_trackers))
+		return pick(SSjob.latejoin_override_trackers)
+	//BUBBERSTATION CHANGE END
 	if(length(SSjob.latejoin_trackers))
 		return pick(SSjob.latejoin_trackers)
 	return SSjob.get_last_resort_spawn_points()
@@ -584,6 +588,12 @@
 				player_client.prefs.read_preference(/datum/preference/choiced/species),
 			)
 	dna.update_dna_identity()
+	// BUBBER EDIT START
+	if(get_taur_mode() == STYLE_TAUR_SNAKE)
+		RemoveElement(/datum/element/footstep, FOOTSTEP_MOB_HUMAN, 0.6, -6)
+		AddElement(/datum/element/footstep, FOOTSTEP_MOB_SNAKE, 15, -6)
+	// BUBBER EDIT END
+
 	updateappearance()
 
 /mob/living/silicon/ai/apply_prefs_job(client/player_client, datum/job/job)

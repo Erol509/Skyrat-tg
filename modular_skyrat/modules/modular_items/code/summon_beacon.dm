@@ -2,10 +2,8 @@
 	name = "summoner beacon"
 	desc = "Summons a thing. Probably shouldn't use this one, though."
 	icon = 'icons/obj/devices/remote.dmi'
-	icon_state = "generic_delivery"
-	inhand_icon_state = "generic_delivery"
-	lefthand_file = 'icons/mob/inhands/items/devices_lefthand.dmi'
-	righthand_file = 'icons/mob/inhands/items/devices_righthand.dmi'
+	icon_state = "self_delivery"
+	inhand_icon_state = null
 	w_class = WEIGHT_CLASS_SMALL
 
 	/// How many uses the beacon has left
@@ -114,6 +112,7 @@
 
 	if(!uses)
 		qdel(src)
+	return ITEM_INTERACT_SUCCESS
 
 // Misc stuff here
 

@@ -5,6 +5,13 @@
 /obj/machinery/quantum_server/proc/cool_off()
 	is_ready = TRUE
 	update_appearance()
+	//BUBBER ADDITION BEGIN - This is a HORRIBLE HACK to stop the radio from blurting out on cargo channel for dauntless prisoners
+	//If the dauntless map is removed, remove this hack!
+	var/area/curr = get_area(src)
+	if(istype(curr, /area/ruin/space/has_grav/bubbers/dauntless) || istype(curr, /area/ruin/space/has_grav/bubbers/dauntless_space))
+		balloon_alert_to_viewers("cooldown has completed")
+		return
+	//BUBBER ADDITION END
 	radio.talk_into(src, "Thermal systems within operational parameters. Proceeding to domain configuration.", RADIO_CHANNEL_SUPPLY)
 
 

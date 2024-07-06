@@ -1,23 +1,23 @@
-#define HYPO_INJECT 1
 #define HYPO_SPRAY 0
+#define HYPO_INJECT 1
 
-#define WAIT_INJECT 2 SECONDS
-#define WAIT_SPRAY 1.5 SECONDS
-#define SELF_INJECT 1.5 SECONDS
-#define SELF_SPRAY 1.5 SECONDS
+#define WAIT_SPRAY 15
+#define WAIT_INJECT 20
+#define SELF_SPRAY 15
+#define SELF_INJECT 15
 
-#define DELUXE_WAIT_INJECT 0.5 SECONDS
 #define DELUXE_WAIT_SPRAY 0
-#define DELUXE_SELF_INJECT 1 SECONDS
-#define DELUXE_SELF_SPRAY 1 SECONDS
+#define DELUXE_WAIT_INJECT 5
+#define DELUXE_SELF_SPRAY 10
+#define DELUXE_SELF_INJECT 10
 
-#define COMBAT_WAIT_INJECT 0
 #define COMBAT_WAIT_SPRAY 0
-#define COMBAT_SELF_INJECT 0
+#define COMBAT_WAIT_INJECT 0
 #define COMBAT_SELF_SPRAY 0
+#define COMBAT_SELF_INJECT 0
 
 /obj/item/hypospray/mkii
-	name = "hypospray Mk.II"
+	name = "hypospray mk.II"
 	icon_state = "hypo2"
 	icon = 'modular_skyrat/modules/hyposprays/icons/hyposprays.dmi'
 	greyscale_config = /datum/greyscale_config/hypospray_mkii
@@ -29,7 +29,7 @@
 	/// The presently-inserted vial.
 	var/obj/item/reagent_containers/cup/vial/vial
 	/// If the Hypospray starts with a vial, which vial does it start with?
-	var/obj/item/reagent_containers/cup/vial/start_vial
+	var/start_vial
 
 	/// Time taken to inject others
 	var/inject_wait = WAIT_INJECT
@@ -74,10 +74,18 @@
 /obj/item/hypospray/mkii/piercing/atropine
 	start_vial = /obj/item/reagent_containers/cup/vial/small/atropine
 
+/obj/item/hypospray/mkii/deluxe
+	name = "hypospray mk.II deluxe"
+	allowed_containers = list(/obj/item/reagent_containers/cup/vial/small, /obj/item/reagent_containers/cup/vial/large)
+	icon_state = "bighypo2"
+	gags_bodystate = "hypo2_deluxe"
+	desc = "The deluxe DeForest Mk. II hypospray, able to take both 100u and 50u vials."
+	small_only = FALSE
+
 // Deluxe hypo upgrade Kit
 /obj/item/device/custom_kit/deluxe_hypo2
-	name = "hypospray Mk. II deluxe bodykit"
-	desc = "Upgrades the DeForest Hypospray Mk. II to support larger vials."
+	name = "DeForest Mk. II Hypospray Deluxe Bodykit"
+	desc = "Upgrades the DeForest Mk. II Hypospray to support larger vials."
 	// don't tinker with a loaded (medi)gun. fool
 	from_obj = /obj/item/hypospray/mkii
 	to_obj = /obj/item/hypospray/mkii/deluxe
@@ -92,18 +100,11 @@
 		return FALSE
 	return TRUE
 
-/obj/item/hypospray/mkii/deluxe
-	name = "hypospray Mk.II deluxe"
-	icon_state = "bighypo2"
-	gags_bodystate = "hypo2_deluxe"
-	desc = "The deluxe variant of the Hypospray Mk. II, able to take both 100u and 50u vials."
-	small_only = FALSE
-
 /obj/item/hypospray/mkii/deluxe/cmo
-	name = "hypospray Mk.II deluxe: CMO edition"
+	name = "CMO's deluxe hypospray mk.II"
 	icon_state = "cmo2"
 	gags_bodystate = "hypo2_cmo"
-	desc = "The CMO's prized Hypospray Mk. II Deluxe, able to take both 100u and 50u vials, acting faster and able to deliver more reagents per spray."
+	desc = "The CMO's prized deluxe hypospray, able to take both 100u and 50u vials, acting faster and able to deliver more reagents per spray."
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	inject_wait = DELUXE_WAIT_INJECT
 	spray_wait = DELUXE_WAIT_SPRAY
@@ -111,11 +112,11 @@
 	inject_self = DELUXE_SELF_INJECT
 	penetrates = INJECT_CHECK_PENETRATE_THICK
 
-/obj/item/hypospray/mkii/deluxe/combat
-	name = "hypospray Mk.II deluxe: combat edition"
+/obj/item/hypospray/mkii/deluxe/cmo/combat
+	name = "combat-grade hypospray mk.II"
 	icon_state = "combat2"
 	gags_bodystate = "hypo2_tactical"
-	desc = "A variant of the Hypospray Mk. II Deluxe, able to take both 100u and 50u vials, with overcharged applicators and an armor-piercing tip."
+	desc = "A variant of the deluxe hypospray, able to take both 100u and 50u vials, with overcharged applicators and an armor-piercing tip."
 	// Made non-indestructible since this is typically an admin spawn.  still robust though!
 	resistance_flags = LAVA_PROOF | FIRE_PROOF | ACID_PROOF
 	inject_wait = COMBAT_WAIT_INJECT
@@ -127,11 +128,6 @@
 /obj/item/hypospray/mkii/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/update_icon_updates_onmob)
-	if(!isnull(start_vial))
-		var/init_vial = new start_vial()
-		vial = init_vial
-		start_vial = null
-		update_appearance()
 
 /obj/item/hypospray/mkii/update_overlays()
 	. = ..()
@@ -196,28 +192,33 @@
 		to_chat(user, span_notice("This hypo isn't loaded!"))
 		return
 
-/obj/item/hypospray/mkii/proc/insert_vial(obj/item/new_vial, mob/living/user)
-	if(!is_type_in_list(new_vial, allowed_containers))
+/obj/item/hypospray/mkii/proc/insert_vial(obj/item/new_vial, mob/living/user, obj/item/current_vial)
+	var/obj/item/reagent_containers/cup/vial/container = new_vial
+	var/old_loc //The location of and old vial.
+	if(!is_type_in_list(container, allowed_containers))
 		to_chat(user, span_notice("[src] doesn't accept this type of vial."))
 		return FALSE
-	var/atom/quickswap_loc = new_vial.loc
-	if(!user.transferItemToLoc(new_vial, src))
+	if(current_vial)
+		old_loc = container.loc
+		var/obj/item/reagent_containers/cup/vial/old_container = current_vial
+		old_container.forceMove(drop_location())
+	if(!user.transferItemToLoc(container, src))
 		return FALSE
-	if(!isnull(vial))
-		if(quickswap_loc == user)
-			user.put_in_hands(vial)
-		else
-			vial.forceMove(quickswap_loc)
-	vial = new_vial
+	vial = container
 	user.visible_message(span_notice("[user] has loaded a vial into [src]."), span_notice("You have loaded [vial] into [src]."))
 	playsound(loc, 'sound/weapons/autoguninsert.ogg', 35, 1)
 	update_appearance()
+	if(current_vial)
+		if(old_loc == user)
+			user.put_in_hands(current_vial)
+		else
+			current_vial.forceMove(old_loc)
 
 /obj/item/hypospray/mkii/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(!istype(tool, /obj/item/reagent_containers/cup/vial))
 		return NONE
 	if(isnull(vial) || quickload)
-		insert_vial(tool, user)
+		insert_vial(tool, user, vial)
 		return ITEM_INTERACT_SUCCESS
 	to_chat(user, span_warning("[src] can not hold more than one vial!"))
 	return ITEM_INTERACT_BLOCKING
@@ -251,12 +252,12 @@
 
 /obj/item/hypospray/mkii/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(istype(interacting_with, /obj/item/reagent_containers/cup/vial))
-		insert_vial(interacting_with, user)
+		insert_vial(interacting_with, user, interacting_with)
 		return ITEM_INTERACT_SUCCESS
-	return do_inject(interacting_with, user, mode=HYPO_SPRAY)
+	return do_inject(interacting_with, user, mode=HYPO_INJECT)
 
 /obj/item/hypospray/mkii/interact_with_atom_secondary(atom/interacting_with, mob/living/user, list/modifiers)
-	return do_inject(interacting_with, user, mode=HYPO_INJECT)
+	return do_inject(interacting_with, user, mode=HYPO_SPRAY)
 
 /obj/item/hypospray/mkii/proc/do_inject(mob/living/injectee, mob/living/user, mode)
 	if(!isliving(injectee))
@@ -330,19 +331,19 @@
 
 /obj/item/hypospray/mkii/examine(mob/user)
 	. = ..()
-	. += span_notice("<b>Left-Click</b> on patients to spray, <b>Right-Click</b> to inject.")
+	. += span_notice("<b>Left-Click</b> on patients to inject, <b>Right-Click</b> to spray.")
 
-#undef HYPO_INJECT
 #undef HYPO_SPRAY
-#undef WAIT_INJECT
+#undef HYPO_INJECT
 #undef WAIT_SPRAY
-#undef SELF_INJECT
+#undef WAIT_INJECT
 #undef SELF_SPRAY
-#undef DELUXE_WAIT_INJECT
+#undef SELF_INJECT
 #undef DELUXE_WAIT_SPRAY
-#undef DELUXE_SELF_INJECT
+#undef DELUXE_WAIT_INJECT
 #undef DELUXE_SELF_SPRAY
-#undef COMBAT_WAIT_INJECT
+#undef DELUXE_SELF_INJECT
 #undef COMBAT_WAIT_SPRAY
-#undef COMBAT_SELF_INJECT
+#undef COMBAT_WAIT_INJECT
 #undef COMBAT_SELF_SPRAY
+#undef COMBAT_SELF_INJECT

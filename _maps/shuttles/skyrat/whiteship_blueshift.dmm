@@ -381,13 +381,6 @@
 /obj/item/ai_module/reset,
 /turf/open/floor/circuit,
 /area/shuttle/abandoned/engine)
-"ec" = (
-/obj/structure/table,
-/obj/effect/decal/cleanable/dirt,
-/obj/machinery/cell_charger,
-/obj/item/stock_parts/power_store/cell/super,
-/turf/open/floor/iron/dark,
-/area/shuttle/abandoned/bridge)
 "ei" = (
 /obj/effect/turf_decal/box,
 /obj/effect/turf_decal/stripes,
@@ -1157,6 +1150,13 @@
 	},
 /turf/template_noop,
 /area/shuttle/abandoned/engine)
+"lw" = (
+/obj/structure/table,
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/cell_charger,
+/obj/item/stock_parts/power_store/cell/super,
+/turf/open/floor/iron/dark,
+/area/shuttle/abandoned/bridge)
 "lC" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/pipe/smart/manifold/supply/hidden,
@@ -3282,6 +3282,23 @@
 /obj/structure/chair/stool/bar/directional/east,
 /turf/open/floor/iron,
 /area/shuttle/abandoned/bar)
+"FJ" = (
+/obj/effect/turf_decal/bot_white,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/table,
+/obj/item/stack/sheet/iron/fifty,
+/obj/item/storage/toolbox/electrical{
+	pixel_x = -3;
+	pixel_y = 8
+	},
+/obj/item/stock_parts/power_store/cell/high{
+	pixel_x = 3;
+	pixel_y = -1
+	},
+/obj/effect/decal/cleanable/cobweb,
+/obj/structure/alien/weeds,
+/turf/open/floor/iron/dark,
+/area/shuttle/abandoned)
 "FM" = (
 /obj/machinery/door/airlock/engineering{
 	name = "Engineering"
@@ -3827,6 +3844,17 @@
 	},
 /turf/open/floor/iron/dark,
 /area/shuttle/abandoned/crew)
+"Kj" = (
+/obj/structure/table,
+/obj/effect/turf_decal/bot,
+/obj/machinery/cell_charger,
+/obj/item/stock_parts/power_store/cell/high,
+/obj/item/multitool,
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/alien/weeds,
+/obj/item/stock_parts/power_store/cell/super,
+/turf/open/floor/plating,
+/area/shuttle/abandoned/engine)
 "Kt" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/tile/bar,
@@ -4269,25 +4297,6 @@
 /obj/item/t_scanner,
 /turf/open/floor/iron/dark,
 /area/shuttle/abandoned/cargo)
-"Pk" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/turf_decal/box/white/corners{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 1
-	},
-/obj/effect/turf_decal/tile/neutral,
-/obj/effect/turf_decal/tile/neutral{
-	dir = 4
-	},
-/obj/effect/turf_decal/tile/neutral{
-	dir = 8
-	},
-/obj/structure/window/reinforced/spawner/directional/west,
-/obj/machinery/computer/secure_data,
-/turf/open/floor/iron/dark,
-/area/shuttle/abandoned)
 "Pm" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/tile/blue{
@@ -5038,23 +5047,6 @@
 	},
 /turf/open/floor/wood,
 /area/shuttle/abandoned/bar)
-"Wd" = (
-/obj/effect/turf_decal/bot_white,
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/table,
-/obj/item/stack/sheet/iron/fifty,
-/obj/item/storage/toolbox/electrical{
-	pixel_x = -3;
-	pixel_y = 8
-	},
-/obj/item/stock_parts/power_store/cell/high{
-	pixel_x = 3;
-	pixel_y = -1
-	},
-/obj/effect/decal/cleanable/cobweb,
-/obj/structure/alien/weeds,
-/turf/open/floor/iron/dark,
-/area/shuttle/abandoned)
 "Wn" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/turf_decal/stripes/white/line{
@@ -5193,17 +5185,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/iron/cafeteria,
 /area/shuttle/abandoned/crew)
-"Xf" = (
-/obj/structure/table,
-/obj/effect/turf_decal/bot,
-/obj/machinery/cell_charger,
-/obj/item/stock_parts/power_store/cell/high,
-/obj/item/multitool,
-/obj/effect/decal/cleanable/dirt,
-/obj/structure/alien/weeds,
-/obj/item/stock_parts/power_store/cell/super,
-/turf/open/floor/plating,
-/area/shuttle/abandoned/engine)
 "Xj" = (
 /obj/effect/turf_decal/stripes/line{
 	dir = 8
@@ -5270,6 +5251,25 @@
 /obj/structure/alien/weeds,
 /turf/open/floor/iron/cafeteria,
 /area/shuttle/abandoned/crew)
+"XZ" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/turf_decal/box/white/corners{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 1
+	},
+/obj/effect/turf_decal/tile/neutral,
+/obj/effect/turf_decal/tile/neutral{
+	dir = 4
+	},
+/obj/effect/turf_decal/tile/neutral{
+	dir = 8
+	},
+/obj/structure/window/reinforced/spawner/directional/west,
+/obj/machinery/computer/records/security,
+/turf/open/floor/iron/dark,
+/area/shuttle/abandoned)
 "Ya" = (
 /obj/structure/frame/computer{
 	anchored = 1;
@@ -5738,7 +5738,7 @@ wQ
 ii
 oB
 Qq
-Xf
+Kj
 ii
 GH
 GH
@@ -6196,7 +6196,7 @@ bb
 XC
 aa
 jq
-ec
+lw
 nS
 mp
 os
@@ -6429,7 +6429,7 @@ Uq
 GH
 VG
 Vh
-Wd
+FJ
 zp
 qu
 Vh
@@ -6533,7 +6533,7 @@ GH
 Uq
 GH
 AR
-Pk
+XZ
 aU
 Xu
 PN

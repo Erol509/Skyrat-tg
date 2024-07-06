@@ -43,6 +43,7 @@
 	subcategory = "Hardened Armor"
 	cost = PAYCHECK_CREW * 3
 
+/* //BUBBER EDIT REMOVAL BEGIN
 /datum/armament_entry/company_import/sol_defense/armor_hardened/enclosed_helmet
 	item_type = /obj/item/clothing/head/helmet/toggleable/sf_hardened
 
@@ -99,6 +100,7 @@
 	item_type = /obj/item/gun/ballistic/revolver/takbok
 	cost = PAYCHECK_COMMAND * 6
 
+// The Skild and Takbok use very strong ammunition, and likely should not be available to normal crew.
 // Lethal anything that's not a pistol, requires high company interest
 
 /datum/armament_entry/company_import/sol_defense/longarm
@@ -125,7 +127,7 @@
 /datum/armament_entry/company_import/sol_defense/longarm/infanterie
 	item_type = /obj/item/gun/ballistic/automatic/sol_rifle
 	cost = PAYCHECK_COMMAND * 14
-	contraband = TRUE
+	// contraband = TRUE - Bubberstation Edit
 
 /datum/armament_entry/company_import/sol_defense/longarm/outomaties
 	item_type = /obj/item/gun/ballistic/automatic/sol_rifle/machinegun
@@ -136,23 +138,23 @@
 	item_type = /obj/item/gun/ballistic/automatic/sol_grenade_launcher
 	cost = PAYCHECK_COMMAND * 46
 	contraband = TRUE
-
+*/
 /datum/armament_entry/company_import/sol_defense/magazines
 	subcategory = "Magazines"
 	cost = PAYCHECK_CREW
 
 /datum/armament_entry/company_import/sol_defense/magazines/c35_mag
-	item_type = /obj/item/ammo_box/magazine/c35sol_pistol/starts_empty
+	item_type = /obj/item/ammo_box/magazine/c35sol_pistol
 
 /datum/armament_entry/company_import/sol_defense/magazines/c35_extended
-	item_type = /obj/item/ammo_box/magazine/c35sol_pistol/stendo/starts_empty
+	item_type = /obj/item/ammo_box/magazine/c35sol_pistol/stendo
 
 /datum/armament_entry/company_import/sol_defense/magazines/c585_mag
-	item_type = /obj/item/ammo_box/magazine/c585trappiste_pistol/spawns_empty
+	item_type = /obj/item/ammo_box/magazine/c585trappiste_pistol
 
 /datum/armament_entry/company_import/sol_defense/magazines/sol_rifle_short
-	item_type = /obj/item/ammo_box/magazine/c40sol_rifle/starts_empty
-
+	item_type = /obj/item/ammo_box/magazine/c40sol_rifle
+/*
 /datum/armament_entry/company_import/sol_defense/magazines/sol_rifle_standard
 	item_type = /obj/item/ammo_box/magazine/c40sol_rifle/standard/starts_empty
 	cost = PAYCHECK_COMMAND
@@ -161,12 +163,14 @@
 	item_type = /obj/item/ammo_box/magazine/c40sol_rifle/drum/starts_empty
 	cost = PAYCHECK_COMMAND * 3
 	contraband = TRUE
-
+*/
 /datum/armament_entry/company_import/sol_defense/magazines/sol_grenade_standard
 	item_type = /obj/item/ammo_box/magazine/c980_grenade/starts_empty
 	cost = PAYCHECK_COMMAND * 2
-
+/*
 /datum/armament_entry/company_import/sol_defense/magazines/sol_grenade_drum
 	item_type = /obj/item/ammo_box/magazine/c980_grenade/drum/starts_empty
 	cost = PAYCHECK_CREW * 3
 	contraband = TRUE
+
+*/ //BUBBER EDIT REMOVAL

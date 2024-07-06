@@ -348,6 +348,7 @@ GLOBAL_VAR_INIT(roaches_deployed, FALSE)
 		/obj/item/cautery/cruel = 1,
 		/obj/item/clothing/gloves/latex/coroner = 1,
 		/obj/item/clothing/head/utility/surgerycap/black = 1,
+		/obj/item/clothing/head/beret/medical/coroner = 1,	//Bubbers edit: Coroner beret
 		/obj/item/clothing/mask/surgical = 1,
 		/obj/item/clothing/shoes/sneakers/black = 1,
 		/obj/item/clothing/suit/apron/surgical = 1,

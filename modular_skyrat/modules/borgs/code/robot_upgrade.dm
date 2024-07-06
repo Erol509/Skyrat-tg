@@ -237,7 +237,7 @@
 						/obj/item/quadborg_nose)
 
 /obj/item/borg/upgrade/affectionmodule/action(mob/living/silicon/robot/borg)
-	if(!(TRAIT_R_WIDE in borg.model.model_features))
+	if(!((TRAIT_R_SQUADRUPED in borg.model.model_features) || (TRAIT_R_WIDE in borg.model.model_features)))//BUBBER EDIT - added small quadruped borgs
 		to_chat(usr, span_warning("This unit's chassis does not support this module."))
 		return FALSE
 	. = ..()

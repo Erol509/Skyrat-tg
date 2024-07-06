@@ -52,6 +52,58 @@
 		/obj/item/storage/backpack/duffelbag/deforest_medkit/stocked,
 	)
 
+/datum/supply_pack/medical/kit_surgical_technician
+	name = "Heavy Duty Medical Kit Crate - Surgical/Technician"
+	crate_name = "heavy duty medical kit crate"
+	desc = "Contains a first responder surgical kit, and a medical technician kit."
+	access = ACCESS_MEDICAL
+	cost = CARGO_CRATE_VALUE * 10
+	contains = list(
+		/obj/item/storage/backpack/duffelbag/deforest_paramedic/stocked,
+		/obj/item/storage/backpack/duffelbag/deforest_surgical/stocked,
+	)
+
+/datum/supply_pack/medical/kit_medical_technician
+	name = "Heavy Duty Medical Kit Crate - Medical/Technician"
+	crate_name = "heavy duty medical kit crate"
+	desc = "Contains a large satchel medical kit, and a medical technician kit."
+	access = ACCESS_MEDICAL
+	cost = CARGO_CRATE_VALUE * 10
+	contains = list(
+		/obj/item/storage/backpack/duffelbag/deforest_paramedic/stocked,
+		/obj/item/storage/backpack/duffelbag/deforest_medkit/stocked,
+	)
+
+/datum/supply_pack/security/secmed_medical
+	name = "Security Medic Kit Crate - Medical"
+	crate_name = "security medic crate"
+	desc = "Contains a large satchel medical kit."
+	access = ACCESS_SECURITY
+	cost = CARGO_CRATE_VALUE * 5
+	contains = list(
+		/obj/item/storage/backpack/duffelbag/deforest_medkit/stocked,
+	)
+
+/datum/supply_pack/security/secmed_surgical
+	name = "Security Medic Kit Crate - Surgical"
+	crate_name = "security medic crate"
+	desc = "Contains a first responder surgical kit."
+	access = ACCESS_SECURITY
+	cost = CARGO_CRATE_VALUE * 5
+	contains = list(
+		/obj/item/storage/backpack/duffelbag/deforest_surgical/stocked,
+	)
+
+/datum/supply_pack/security/secmed_technician
+	name = "Security Medic Kit Crate - Technician"
+	crate_name = "security medic crate"
+	desc = "Contains a medical technician kit."
+	access = ACCESS_SECURITY
+	cost = CARGO_CRATE_VALUE * 5
+	contains = list(
+		/obj/item/storage/backpack/duffelbag/deforest_paramedic/stocked,
+	)
+
 /datum/supply_pack/medical/deforest_vendor_refill
 	name = "DeForest Med-Vend Resupply Crate"
 	crate_name = "\improper DeForest Med-Vend resupply crate"

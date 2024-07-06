@@ -290,7 +290,6 @@
 	design_ids += list(
 		"borg_upgrade_surgicaltools",
 	)
-
 	design_ids -= list(
 		"borg_upgrade_pinpointer",
 	)
